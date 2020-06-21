@@ -1,2 +1,2 @@
 # opengl RSM
-contains an simple implemention of Reflective Shadow Map using OpenGL.
+contains a simple implemention of Reflective Shadow Map using OpenGL.
