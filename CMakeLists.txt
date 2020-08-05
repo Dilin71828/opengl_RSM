@@ -4,8 +4,8 @@ project(opengl_RSM)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
 if (WIN32)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORE ${CMAKE_SOURCE_DIR}/bin)
-endif(WIN32)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+endif (WIN32)
 
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
