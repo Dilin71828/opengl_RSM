@@ -47,15 +47,15 @@ float LinerizeDepth(float depth)
 }
 
 void main(){
-    //¼ÆËã¹âÔ´¿Õ¼ä×ø±ê
+    //è®¡ç®—å…‰æºç©ºé—´åæ ‡
 	vec3 projCoords=FragPosLightSpace.xyz/FragPosLightSpace.w;
 	projCoords=projCoords*0.5+0.5;
 
-	//¼ÆËãÒõÓ°
+	//è®¡ç®—é˜´å½±
 	float depthValue=LinerizeDepth(texture(depthMap, projCoords.xy).r);
 	float shadow=LinerizeDepth(projCoords.z)-shadow_bias>depthValue?0.05:1.0;
 
-	//¼ÆËã¼ä½Ó¹âÕÕ
+	//è®¡ç®—é—´æ¥å…‰ç…§
 	vec3 indirect=vec3(0.0,0.0,0.0);
 	for (int i=0; i<sample_num; i=i+1){
 		vec3 r=texelFetch(randomMap, ivec2(i, 0), 0).xyz;
@@ -77,15 +77,15 @@ void main(){
 	vec3 lightDir = normalize(light.position - FragPos);
 	//vec3 lightDir=normalize(-light.direction);
 
-	//»·¾³¹â
+	//ç¯å¢ƒå…‰
 	vec3 ambient = light.ambient * material.ambient;
 	
-	//Âş·´Éä
+	//æ¼«åå°„
 	vec3 norm = normalize(Normal);
 	float diff=max(dot(norm,lightDir),0.0);  
 	vec3 diffuse = light.diffuse * diff * material.diffuse;
 
-	//¾µÃæ·´Éä
+	//é•œé¢åå°„
 	vec3 viewDir=normalize(viewPos-FragPos);
 	//vec3 reflectDir=reflect(-lightDir, norm);
 	vec3 halfwayDir=normalize(lightDir+viewDir);
@@ -93,7 +93,7 @@ void main(){
 	vec3 specular=light.specular * spec * material.specular;
 
 
-	//Ë¥¼õ
+	//è¡°å‡
 	//float dist=length(light.position-FragPos);
 	//float attenuation=1.0/(light.constant+light.linear*dist+light.quadratic*dist*dist);
 	//ambient*=attenuation;

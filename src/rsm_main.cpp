@@ -288,14 +288,14 @@ int main() {
 
 
 
-	//´´½¨Ö¡»º³å
+	//åˆ›å»ºå¸§ç¼“å†²
 	GLuint rsmFBO;
 	GLuint depthMap, normalMap, worldPosMap, fluxMap;
 	glGenFramebuffers(1, &rsmFBO);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, rsmFBO);
 	const GLuint RSM_WIDTH = 1024, RSM_HEIGHT = 1024;
-	//Éî¶È»º´æ
+	//æ·±åº¦ç¼“å­˜
 	glGenTextures(1, &depthMap); 
 	glBindTexture(GL_TEXTURE_2D, depthMap);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, RSM_WIDTH, RSM_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
@@ -305,7 +305,7 @@ int main() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	GLfloat depth_borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, depth_borderColor);
-	//·¨Ïß»º´æ
+	//æ³•çº¿ç¼“å­˜
 	glGenTextures(1, &normalMap);
 	glBindTexture(GL_TEXTURE_2D, normalMap);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, RSM_WIDTH, RSM_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
@@ -315,7 +315,7 @@ int main() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	GLfloat border_Color[] = { 0.0, 0.0, 0.0, 0.0 };
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, depth_borderColor);
-	//ÊÀ½ç×ø±ê»º´æ
+	//ä¸–ç•Œåæ ‡ç¼“å­˜
 	glGenTextures(1, &worldPosMap);
 	glBindTexture(GL_TEXTURE_2D, worldPosMap);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, RSM_WIDTH, RSM_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
@@ -324,7 +324,7 @@ int main() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, depth_borderColor);
-	//¹âÍ¨Á¿»º´æ
+	//å…‰é€šé‡ç¼“å­˜
 	glGenTextures(1, &fluxMap);
 	glBindTexture(GL_TEXTURE_2D, fluxMap);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, RSM_WIDTH, RSM_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
@@ -347,10 +347,10 @@ int main() {
 	glDrawBuffers(3, rsm_draw_buffers);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	//Éú³ÉÒ»¸öÓÃÓÚ²ÉÑùµÄËæ»úÎÆÀí
+	//ç”Ÿæˆä¸€ä¸ªç”¨äºé‡‡æ ·çš„éšæœºçº¹ç†
 	GLuint randomMap = createRandomTexture(MAX_SAMPLE_NUM);
 
-	//°ó¶¨ÎÆÀí
+	//ç»‘å®šçº¹ç†
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, depthMap);
 	glActiveTexture(GL_TEXTURE1);
@@ -364,7 +364,7 @@ int main() {
 
 
 
-	//ÅäÖÃ¹âÔ´¿Õ¼äµÄ×ÅÉ«Æ÷
+	//é…ç½®å…‰æºç©ºé—´çš„ç€è‰²å™¨
 	glm::mat4 lightProjection = glm::perspective(glm::radians(60.0f), (float)RSM_WIDTH/(float)RSM_HEIGHT, light_near_plane, light_far_plane);
 	glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
@@ -374,7 +374,7 @@ int main() {
 	light_space_shader.setVec3("light.diffuse", light_diffuse);
 
 
-	//ÅäÖÃÖ÷»æÖÆ×ÅÉ«Æ÷
+	//é…ç½®ä¸»ç»˜åˆ¶ç€è‰²å™¨
 	main_light_shader.use();
 	main_light_shader.setVec3("material.ambient", 0.1f, 0.1f, 0.1f);
 	main_light_shader.setVec3("material.specular", 0.1f, 0.1f, 0.1f);
@@ -388,7 +388,7 @@ int main() {
 	main_light_shader.setFloat("sample_radius", MAX_SAMPLE_RADIUS);
 	main_light_shader.setFloat("shadow_bias", 0.05);
 
-	//Ö¸¶¨²ÉÑùÆ÷
+	//æŒ‡å®šé‡‡æ ·å™¨
 	main_light_shader.setInt("depthMap", 0);
 	main_light_shader.setInt("normalMap", 1);
 	main_light_shader.setInt("worldPosMap", 2);
@@ -494,7 +494,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 	camera.ProcessMouseScroll(yoffset);
 }
 
-//Éú³É²ÉÑùÓÃµÄËæ»úÎÆÀí
+//ç”Ÿæˆé‡‡æ ·ç”¨çš„éšæœºçº¹ç†
 GLuint createRandomTexture(int size) {
 	std::default_random_engine eng;
 	std::uniform_real_distribution<float> dist(0.0f, 1.0f);
